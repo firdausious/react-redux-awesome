@@ -3,6 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux'
 
 import Counter from './components/Counter'
+import Users from './components/Users'
 import store from './redux/store'
 
 import logo from './logo.svg';
@@ -19,6 +20,7 @@ function App() {
 
         <Provider store={store}>
           <Counter />
+          <Users />
         </Provider>
 
       </header>

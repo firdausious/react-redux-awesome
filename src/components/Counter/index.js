@@ -1,27 +1,34 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from "react";
+import PropTypes from "prop-types";
 
-import { incrementAction, decrementAction } from '../../redux/actions'
+import { connect } from "react-redux";
 
-const Counter = ({ counter, increment, decrement }) => (
+import {
+  increment as incrementAction,
+  decrement as decrementAction,
+} from "../../redux/modules/counter";
+
+const Counter = ({ count, increment, decrement }) => (
   <div>
-    <h2>{counter}</h2>
+    <h2>{count}</h2>
 
     <button onClick={() => increment()}>+</button>
     <button onClick={() => decrement()}>-</button>
   </div>
-)
+);
 
-const mapStateToProps = state => ({
-  counter: state
-})
+Counter.propTypes = {
+  count: PropTypes.number.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+};
 
-const mapDispatchToProps = dispatch => ({
-  increment: () => dispatch(incrementAction),
-  decrement: () => dispatch(decrementAction)
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Counter)
-
-
-
+export default connect(
+  (state) => ({
+    count: state?.counter?.count,
+  }),
+  (dispatch) => ({
+    increment: () => dispatch(incrementAction()),
+    decrement: () => dispatch(decrementAction()),
+  })
+)(Counter);
