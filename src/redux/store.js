@@ -1,17 +1,20 @@
-import { createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { createStore, applyMiddleware } from 'redux'
+import logger from 'redux-logger'
+import thunk from 'redux-thunk'
 
-const myReducer = (state = 0, action) => {
-  switch (action.type) {
-    case "INCREMENT":
-      return state + 1
-    case "DECREMENT":
-      return state - 1
-    default:
-      return 0
-  }
-}
+import rootReducer from './reducers'
 
-const store = createStore(myReducer)
+// prepare middleware
+const middlewares = [thunk, logger]
+
+// mapping store
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(
+    applyMiddleware(...middlewares)
+  )
+)
 
 export default store
 
