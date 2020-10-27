@@ -1,4 +1,10 @@
 import React from 'react';
+
+import { Provider } from 'react-redux'
+
+import Counter from './components/Counter'
+import store from './redux/store'
+
 import logo from './logo.svg';
 import './App.css';
 
@@ -8,16 +14,13 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Yo Redux!
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
+        <Provider store={store}>
+          <Counter />
+        </Provider>
+
       </header>
     </div>
   );
